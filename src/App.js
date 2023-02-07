@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Data from './Data.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  showModal = (eData) => {
+    //console.log("mouse over")
+    //console.log(eData)
+    let empInfo = "Name : "+eData.name+"\nAge : "+eData.age+"\nDate of Birth : "+eData.DOB+"\nSalary : "+eData.salary+"\nDesignation : "+eData.designation+"\ndepartment : "+eData.department
+    alert(empInfo)
+
+  };
+
+  render() {
+    return (
+      <> {
+        Data.Employees.map((emp) => {
+          return (
+
+            <div
+              key={emp.id}
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+              <h3 onMouseOver={() => this.showModal(emp)} >
+                {emp.name}
+              </h3>
+              <img src={emp.imageProfile} height={200} width={200} />
+              <p>{emp.designation} </p>
+            </div>
+
+          )
+        })
+      }
+      </>
+    );
+  }
 }
 
 export default App;
